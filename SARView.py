@@ -51,6 +51,9 @@ class SARView:
             return
         
         active_layer = layers[0]
+        if not (self.dlg.radRGB.isChecked() or self.dlg.radGray.isChecked()):
+            self.iface.messageBar().pushMessage("Warning", "Please select a display mode (Grayscale or RGB) first.", level=1)
+            return
         
         #  Get User Parameters
         outlier_k = self.dlg.OutlierDec.value()     
@@ -64,9 +67,66 @@ class SARView:
         else:
             self.iface.messageBar().pushMessage("Error", "Log calculation failed.", level=2)
             return
-        apply_outlier_stretch(active_layer, outlier_k)
+        mode = "RGB" if self.dlg.radRGB.isChecked() else "Gray"
         
+        def get_band_idx(combo):
+            if combo.currentText() == "None": return -1
+            return int(combo.currentText().split(" ")[1]) # Extracts '1' from 'Band 1'
 
+        if mode == "Gray":
+            mapping = {'gray': get_band_idx(self.dlg.cmbGrayBand)}
+        else:
+            mapping = {
+                'red': get_band_idx(self.dlg.cmbRedBand),
+                'green': get_band_idx(self.dlg.cmbGreenBand),
+                'blue': get_band_idx(self.dlg.cmbBlueBand)
+            }
+
+        apply_outlier_stretch(new_layer, outlier_k, mode, mapping)
+        
+    def init_ui_connections(self):
+        self.dlg.LayerSelector.currentIndexChanged.connect(self.update_band_combos)
+        
+        self.dlg.radGray.toggled.connect(self.toggle_mode_ui)
+        self.dlg.radRGB.toggled.connect(self.toggle_mode_ui)
+
+    def toggle_mode_ui(self):
+        is_rgb = self.dlg.radRGB.isChecked()
+        is_gray = self.dlg.radGray.isChecked()
+        
+        self.dlg.cmbGrayBand.setVisible(is_gray)
+        self.dlg.cmbRedBand.setVisible(is_rgb)
+        self.dlg.cmbGreenBand.setVisible(is_rgb)
+        self.dlg.cmbBlueBand.setVisible(is_rgb)
+
+    def update_band_combos(self):
+        selected_name = self.dlg.LayerSelector.currentText()
+        layers = QgsProject.instance().mapLayersByName(selected_name)
+        if not layers:
+            return
+            
+        layer = layers[0]
+        band_count = layer.bandCount()
+        
+        bands = [f"Band {i}" for i in range(1, band_count + 1)]
+        
+        combos = [self.dlg.cmbGrayBand, self.dlg.cmbRedBand, self.dlg.cmbGreenBand, self.dlg.cmbBlueBand]
+        for cmb in combos:
+            cmb.clear()
+            
+        self.dlg.cmbGrayBand.addItems(bands)
+        
+        rgb_options = ["None"] + bands
+        self.dlg.cmbRedBand.addItems(rgb_options)
+        self.dlg.cmbGreenBand.addItems(rgb_options)
+        self.dlg.cmbBlueBand.addItems(rgb_options)
+        
+        if band_count >= 1:
+            self.dlg.cmbRedBand.setCurrentIndex(1) # Band 1
+        if band_count >= 2:
+            self.dlg.cmbGreenBand.setCurrentIndex(2) # Band 2
+        if band_count >= 3:
+            self.dlg.cmbBlueBand.setCurrentIndex(3) # Band 3
     def __init__(self, iface):
         """Constructor.
 
@@ -98,6 +158,7 @@ class SARView:
         self.dlg = SARViewDialog()
         
         self.dlg.EnhanceBtn.clicked.connect(self.enhance_layer) 
+        self.init_ui_connections()
         
         self.first_start = True
 
@@ -216,5 +277,7 @@ class SARView:
 
     def run(self):
         self.populate_layers()
+        self.toggle_mode_ui() 
+        self.update_band_combos() 
         self.dlg.show()
         self.dlg.exec_()

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>822</width>
-    <height>635</height>
+    <width>823</width>
+    <height>771</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,11 +19,11 @@
      <x>10</x>
      <y>440</y>
      <width>801</width>
-     <height>141</height>
+     <height>321</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="2" column="0">
+    <item row="4" column="0">
      <widget class="QPushButton" name="EnhanceBtn">
       <property name="text">
        <string>RUN</string>
@@ -42,14 +42,14 @@
       <item row="2" column="1">
        <widget class="QComboBox" name="LayerSelector"/>
       </item>
-      <item row="3" column="0">
+      <item row="4" column="0">
        <widget class="QLabel" name="logFactorLabel">
         <property name="text">
          <string>Log Factor</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="4" column="1">
        <widget class="QDoubleSpinBox" name="LogFactor">
         <property name="whatsThis">
          <string/>
@@ -62,19 +62,99 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="6" column="0">
        <widget class="QLabel" name="outliersPercentToBeRemovedLabel">
         <property name="text">
          <string>   k</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="8" column="0">
+       <widget class="QLabel" name="dispalyModeLabel">
+        <property name="text">
+         <string>DispalyMode</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string/>
+        </property>
+        <widget class="QRadioButton" name="radGray">
+         <property name="geometry">
+          <rect>
+           <x>90</x>
+           <y>10</y>
+           <width>111</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Grayscale</string>
+         </property>
+        </widget>
+        <widget class="QRadioButton" name="radRGB">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>10</y>
+           <width>111</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>RGB</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item row="6" column="1">
        <widget class="QDoubleSpinBox" name="OutlierDec">
         <property name="value">
          <double>2.000000000000000</double>
         </property>
        </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="grayscaleControlsLabel">
+        <property name="text">
+         <string>Grayscale Controls</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QComboBox" name="cmbGrayBand"/>
+      </item>
+      <item row="10" column="0">
+       <widget class="QLabel" name="rEDLabel">
+        <property name="text">
+         <string>RED</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <widget class="QLabel" name="gREENLabel">
+        <property name="text">
+         <string>GREEN</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="0">
+       <widget class="QLabel" name="bLUELabel">
+        <property name="text">
+         <string>BLUE</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="1">
+       <widget class="QComboBox" name="cmbRedBand"/>
+      </item>
+      <item row="11" column="1">
+       <widget class="QComboBox" name="cmbGreenBand"/>
+      </item>
+      <item row="12" column="1">
+       <widget class="QComboBox" name="cmbBlueBand"/>
       </item>
      </layout>
     </item>
@@ -96,13 +176,16 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;h3 style=&quot; margin-top:14px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:600;&quot;&gt;How to use SAR View&lt;/span&gt;&lt;/h3&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;1. Logarithmic Transformation (dB)&lt;/span&gt;&lt;br /&gt;Synthetic Aperture Radar (SAR) data often has a huge dynamic range. Raw images may appear dark with only a few bright points. The &lt;span style=&quot; font-weight:600;&quot;&gt;Log Scale&lt;/span&gt; option converts the data to Decibels (dB) to reveal hidden details in dark areas.&lt;/p&gt;
-&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Use Factor 10&lt;/span&gt; for Power or Intensity products (standard for Sentinel-1). &lt;/li&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Use Factor 10&lt;/span&gt; for Power or Intensity products (standard for Sentinel-1).     &lt;/li&gt;
 &lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Use Factor 20&lt;/span&gt; for Amplitude products. &lt;/li&gt;&lt;/ul&gt;
 &lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;2. Histogram Stretching (Outlier Removal)&lt;/span&gt;&lt;br /&gt;SAR images contain &amp;quot;speckle&amp;quot; noise—random bright and dark pixels that ruin standard visualization. This tool uses a statistical cut (Standard Deviation) to ignore these outliers.&lt;/p&gt;
-&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Standard Deviation (k):&lt;/span&gt; Defines how much data to keep. 
-&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;k = 2.0 (Default):&lt;/span&gt; Balanced contrast. &lt;/li&gt;
-&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;k High contrast (good for land/water boundaries).&lt;/span&gt;&lt;/li&gt;
-&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;k &amp;gt; 2.0:&lt;/span&gt; Retains extremely bright targets (like ships or metallic structures). &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Standard Deviation (k):&lt;/span&gt; Defines how much data to keep.         
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 2;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;k = 2.0 (Default):&lt;/span&gt; Balanced contrast.             &lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;k &amp;lt; 2.0:&lt;/span&gt; High contrast (good for land/water boundaries).            &lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;k &amp;gt; 2.0:&lt;/span&gt; Retains extremely bright targets (like ships or metallic structures).             &lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;3. Display Modes (Grayscale &amp;amp; RGB)&lt;/span&gt;&lt;br /&gt;Control how your processed SAR bands are mapped to your screen.&lt;/p&gt;
+&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Grayscale:&lt;/span&gt; Best for single-band images or inspecting a specific polarization on its own.    &lt;/li&gt;
+&lt;li style=&quot;&quot; style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;RGB:&lt;/span&gt; Create vivid false-color composites using multi-band data (e.g., VV/VH). Assign available bands to the Red, Green, and Blue channels. Select &amp;quot;None&amp;quot; to leave a specific color channel empty.&lt;/li&gt;&lt;/ul&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

@@ -6,7 +6,7 @@
 name=SAR VIEW
 qgisMinimumVersion=3.22
 description=A specialized tool for Synthetic Aperture Radar (SAR) visualization. It automatically converts raw intensity/amplitude data to Decibels (dB) via logarithmic scaling and enhances contrast using statistical outlier removal (cumulative cut).
-version=0.1
+version=1.0
 author=Mohamad El Moussawi
 email=mohamad.elmoussawi@mail.polimi.it
 
@@ -29,7 +29,7 @@ homepage=https://github.com/le-sawe/SARView
 category=Raster
 icon=icon.png
 # experimental flag
-experimental=True
+experimental=False
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False
